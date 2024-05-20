@@ -171,16 +171,14 @@ BlElement << #MGCardElement
 ```
 
 We redefine the `initialize` method to create the `backElement` as well as adding a layout for 
-placement of the children of the `MGCardElement` instances. 
+placement of the children of the `MGCardElement` instances.
+We use the method `asElement` on the cardback `Form` to quicly create a BlElement with the png as a background and the size equal to the png size.
 
 
 ```
 MGCardElement >> initialize
 	super initialize.
-	backElement := BlElement new
-		background: self class cardbackForm;
-		size:self cardExtent;
-		yourself.			
+	backElement := self class cardbackForm asElement.			
 	self size: self cardExtent.
 	self layout: BlLinearLayout new alignCenter. 
 	self background: self backgroundPaint.
@@ -193,10 +191,7 @@ MGCardElement >> initialize
 In the following added part: 
 
 ```
-backElement := BlElement new
-	background: self class cardbackForm;
-	size:self cardExtent;
-	yourself.	
+backElement := self class cardbackForm asElement.	
 frontElement := BlTextElement new.
 ```
 
@@ -222,10 +217,7 @@ We extract the back element creation in its own method `initializeBackElement`.
 
 ```
 MGCardElement >> initializeBackElement
-	backElement := BlElement new
-		background: self class cardbackForm;
-		size: self cardExtent;
-		yourself
+	backElement := self class cardbackForm asElement
 ```
 
 ```
